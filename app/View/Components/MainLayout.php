@@ -11,9 +11,11 @@ class MainLayout extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public string $pageTitle;
+
+    public function __construct(string $pageTitle)
     {
-        //
+        $this->pageTitle = $pageTitle;
     }
 
     /**
