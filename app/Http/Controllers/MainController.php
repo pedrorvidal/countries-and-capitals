@@ -59,10 +59,15 @@ class MainController extends Controller
             $other_capitals = array_column($this->_app_data, 'capital');
             //remove correct answer
             $other_capitals = array_diff($other_capitals, [$question['correct_answer']]);
-
             shuffle($other_capitals);
+            $question['wrong_answers'] = array_slice($other_capitals, 0, 3);
 
+            // store answer result
+            $question['correct'] = null;
+
+            $questions[] = $question;
         }
+
         return $questions;
     }
 }
