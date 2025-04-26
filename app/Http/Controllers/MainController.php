@@ -38,5 +38,31 @@ class MainController extends Controller
         $quiz = $this->prepareQuiz($total_questions);
         dd($quiz);
     }
-    private function prepareQuiz($total_questions) {}
+    private function prepareQuiz($total_questions)
+    {
+        $questions = [];
+        $total_countries = count($this->_app_data);
+
+        // create countries index for unique questions
+        $indexes = range(0, $total_countries - 1);
+        shuffle($indexes);
+        $indexes = array_slice($indexes, 0, $total_questions);
+        $question_number = 1;
+
+        // create array of questions
+        foreach ($indexes as $index) {
+            $question['question_number'] = $question_number++;
+            $question['country'] = $this->_app_data[$index]['country'];
+            $question['correct_answer'] = $this->_app_data[$index]['capital'];
+
+            //wrong answers
+            $other_capitals = array_column($this->_app_data, 'capital');
+            //remove correct answer
+            $other_capitals = array_diff($other_capitals, [$question['correct_answer']]);
+
+            shuffle($other_capitals);
+
+        }
+        return $questions;
+    }
 }
