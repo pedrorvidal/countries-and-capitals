@@ -18,7 +18,7 @@ class MainController extends Controller
     {
         return view('home');
     }
-    public function prepareGame(Request $request): View
+    public function prepareGame(Request $request)
     {
         //validate request
         $request->validate(
@@ -97,8 +97,8 @@ class MainController extends Controller
 
         return view('game', )->with([
             'country' => $quiz[$current_question]['country'],
-            'total_questions' => $total_questions,
-            'current_question' => $current_question,
+            'totalQuestions' => $total_questions,
+            'currentQuestion' => $current_question,
             'answers' => $answers
         ]);
     }
