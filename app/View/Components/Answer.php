@@ -24,4 +24,5 @@ class Answer extends Component
     {
         return view('components.answer');
     }
+
 }
