@@ -124,6 +124,7 @@ class MainController extends Controller
             $wrong_answers++;
             $quiz[$current_question]['correct'] = false;
         }
+
         // update session
         session()->put([
             'quiz' => $quiz,
@@ -136,8 +137,9 @@ class MainController extends Controller
             'country' => $quiz[$current_question]['country'],
             'correct_answer' => $correct_answer,
             'choice_answer' => $answer,
-            'total_questions' => session('total_questions'),
-            'current_question' => $current_question
+            'totalQuestions' => session('total_questions'),
+            'currentQuestion' => $current_question
         ];
+        return view('answer_result')->with($data);
     }
 }
