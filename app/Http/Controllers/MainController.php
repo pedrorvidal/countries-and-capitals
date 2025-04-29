@@ -96,7 +96,7 @@ class MainController extends Controller
 
         shuffle($answers);
 
-        return view('game',)->with([
+        return view('game', )->with([
             'country' => $quiz[$current_question]['country'],
             'totalQuestions' => $total_questions,
             'currentQuestion' => $current_question,
@@ -141,5 +141,26 @@ class MainController extends Controller
             'currentQuestion' => $current_question
         ];
         return view('answer_result')->with($data);
+    }
+    public function nextQuestion()
+    {
+        $current_question = session('current_question');
+        $total_questions = session('total_questions');
+
+        // check if game is over and forward to next question, if exists
+        if ($current_question < $total_questions) {
+            $current_question++;
+            session()->put('current_question', $current_question);
+            return redirect()->route('game');
+        } else {
+            // game over
+            return redirect()->route('show_results');
+        }
+
+    }
+    public function showResults()
+    {
+        echo 'game over';
+        dd(session()->all());
     }
 }
